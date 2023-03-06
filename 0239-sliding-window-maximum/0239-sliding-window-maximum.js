@@ -21,7 +21,6 @@ var maxSlidingWindow = function(nums, k) {
             queue.push(i);
             if (k === 1) {
                 result.push(nums[queue[0]]);
-                queue.pop();
             }
         }
     }
