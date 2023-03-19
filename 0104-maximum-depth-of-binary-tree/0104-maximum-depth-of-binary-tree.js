@@ -19,9 +19,7 @@ var maxDepth = function(root) {
         if (!node.left && !node.right) {
             return depth;
         }
-        let left = dfs(node.left, depth);
-        let right = dfs(node.right, depth);
-        return Math.max(left, right);
+        return Math.max(dfs(node.left, depth), dfs(node.right, depth));
     }
     return dfs(root, 0);
 };
