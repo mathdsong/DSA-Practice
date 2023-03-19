@@ -11,15 +11,19 @@
  * @return {number}
  */
 var maxDepth = function(root) {
-    // Handle the base case(s), usually an empty tree (node = null) is a base case.
-    // Do some logic for the current node
-    // Recursively call on the current node's children
-    // Return the answer 
-    if (!root) {
-        return 0;
+    let max = 1;
+    let dfs = (node, depth) => {
+        if (!node) {
+            return 0;
+        }
+        depth++;
+        if (!node.left && !node.right) {
+            return depth;
+        }
+        let left = dfs(node.left, depth);
+        let right = dfs(node.right, depth);
+        max = Math.max(left, right);
+        return max;
     }
-
-    let left = maxDepth(root.left);
-    let right = maxDepth(root.right);
-    return Math.max(left, right) + 1;
+    return dfs(root, 0);
 };
