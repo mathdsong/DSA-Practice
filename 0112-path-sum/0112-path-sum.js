@@ -12,16 +12,17 @@
  * @return {boolean}
  */
 var hasPathSum = function(root, targetSum) {
-    // Handle the base case(s), usually an empty tree (node = null) is a base case.
-    // Do some logic for the current node
-    // Recursively call on the current node's children
-    // Return the answer
-    if (!root) {
-        return false;
+    let dfs = (node, sum) => {
+        if (!node) {
+            return false;
+        }
+        
+        sum += node.val;
+        if (!node.left && !node.right) {
+            return sum === targetSum;
+        }
+        
+        return dfs(node.left, sum) || dfs(node.right, sum);
     }
-    targetSum -= root.val;
-    if (!root.left && !root.right) {
-        return targetSum === 0;
-    }
-    return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
+    return dfs(root, 0);
 };
