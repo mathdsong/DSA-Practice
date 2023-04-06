@@ -11,4 +11,4 @@ SELECT u.`user_id` AS `buyer_id`, u.`join_date`,
 COUNT(CASE WHEN o.`order_date` LIKE '2019%' THEN o.`item_id` ELSE NULL END) AS `orders_in_2019` 
 FROM USERS u
 LEFT JOIN Orders o ON u.`user_id` = o.`buyer_id`
-GROUP BY u.`user_id`;
+GROUP BY `user_id`;
