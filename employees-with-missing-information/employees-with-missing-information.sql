@@ -6,6 +6,8 @@
 # The employee's salary is missing.
 # Return the result table ordered by employee_id in ascending order.
 
+
+## Not working:
 # SELECT `employee_id` FROM Employees
 # WHERE `employee_id` IN (
 #     SELECT `employee_id` FROM (
@@ -19,12 +21,16 @@
 # ) 
 
 
+# Thinking Process:
+
 # SELECT e.`employee_id`, e.`name`, s.`salary` FROM Employees e
 # LEFT JOIN Salaries s ON e.`employee_id` = s.`employee_id`
 # UNION 
 # SELECT s.`employee_id`, e.`name`, s.`salary` FROM Employees e
 # RIGHT JOIN Salaries s ON e.`employee_id` = s.`employee_id`
 
+
+# working solution:
 SELECT `employee_id` FROM (
     SELECT e.`employee_id`, e.`name`, s.`salary` FROM Employees e
     LEFT JOIN Salaries s ON e.`employee_id` = s.`employee_id`
