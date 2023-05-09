@@ -2,59 +2,28 @@
  * @param {string} s
  * @return {number}
  */
-// 2nd solution:
 var lengthOfLongestSubstring = function(s) {
-    let left = 0, max = 0, hashmap = new Map();
-    for (var right = 0; right < s.length; right++) {
-        if (hashmap.has(s[right])) {
-            if (hashmap.get(s[right]) < left) {
-                max = Math.max(max, right - left + 1);
-            } else {
-                max = Math.max(max, right - left);
-                left = hashmap.get(s[right]) + 1;
-            }
-        } else {
-            max = Math.max(max, right - left + 1);
+    let left = 0;
+    let right = 0;
+    let max = 0;
+    let curr = new Set();
+
+    while (right < s.length) {
+        while (!curr.has(s[right])) {
+            curr.add(s[right]);
+            max = Math.max(max, right - left);
+            right++;
         }
-        hashmap.set(s[right], right);
+
+        if (right < s.length === false) {
+            break;
+        }
+        max = Math.max(max, right - left);
+        // console.log("right - left: ", right, "-", left, "=", max);
+        curr.delete(s[left]);
+        left++;
+        // console.log("right = ", right, "right < s.length is ", right < s.length);
+
     }
-    console.log(hashmap)
     return max;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 1st solution:
-// var lengthOfLongestSubstring = function(s) {
-//     let left = 0, currStr = ''; res = 0;
-//     for (let right = 0; right < s.length; right++) {
-//         if (!currStr.includes(s[right])) {
-//             currStr += s[right];
-//             res = Math.max(res, currStr.length);
-//         } else {
-//             res = Math.max(res, currStr.length);
-//             while (s[left] !== s[right] && left < right) {
-//                 left++;
-//             }
-//             currStr = '';
-//             left++;
-//             right = left - 1;
-//         }
-        
-//     }
-//     return res;
-// };
+};
