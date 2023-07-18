@@ -1,16 +1,27 @@
-// method1-trivial:
+// method2-prefix:
 class Solution {
     public int[] getModifiedArray(int length, int[][] updates) {
-        int[] res = new int[length];
+
+        int[] arr = new int[length];
+
         for (int i = 0; i < updates.length; i++) {
             int start = updates[i][0];
             int end = updates[i][1];
-            int change = updates[i][2];
-            for (int j = start; j <= end; j++) {
-                res[j] += change;
+            int val = updates[i][2];
+
+            arr[start] += val;
+            if (end + 1 < length) {
+                arr[end + 1] -= val;
             }
+            // System.out.println(Arrays.toString(arr));
         }
-        return res;
+
+        for (int j = 1; j < length; j++) {
+            arr[j] += arr[j -  1];
+        }
+
+        return arr;
+
     }
 }
 
