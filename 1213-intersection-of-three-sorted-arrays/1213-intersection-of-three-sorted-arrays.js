@@ -5,24 +5,21 @@
  * @return {number[]}
  */
 var arraysIntersection = function(arr1, arr2, arr3) {
-    let p1 = 0, p2 = 0, p3 = 0, result = [];
-    while (p1 < arr1.length && p2 < arr2.length && p3 < arr3.length) {
-        if (arr1[p1] === arr2[p2] && arr2[p2] === arr3[p3]) {
-            result.push(arr1[p1]);
-            p1++;
-            p2++;
-            p3++;
-        } else {
-            if (arr1[p1] < arr2[p2] || arr1[p1] < arr3[p3]) {
+    
+    let intersection = (array1, array2) => {
+        let p1 = 0, p2 = 0, result = [];
+        while (p1 < array1.length && p2 < array2.length) {
+            if (array1[p1] === array2[p2]) {
+                result.push(array1[p1]);
                 p1++;
-            }
-            if (arr2[p2] < arr1[p1] || arr2[p2] < arr3[p3]) {
+                p2++;
+            } else if (array1[p1] < array2[p2]) {
+                p1++;
+            } else {
                 p2++;
             }
-            if (arr3[p3] < arr1[p1] || arr3[p3] < arr2[p2]) {
-                p3++;
-            }
         }
+        return result;
     }
-    return result;
+    return intersection(arr3, intersection(arr1, arr2));
 };
