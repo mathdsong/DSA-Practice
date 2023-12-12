@@ -9,7 +9,7 @@ class Solution {
                 total_boxes += curr_box;
             } else {
                 result += (truckSize - total_boxes) * curr_unit;
-                return result;
+                break;
             }
         }
         return result;
