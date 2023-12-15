@@ -19,9 +19,7 @@ class Solution {
             while (nums[j] <= nums[i - 1]) {
                 j--;
             }
-            int temp = nums[j];
-            nums[j] = nums[i - 1];
-            nums[i - 1] = temp;
+            exchange(nums, j, i - 1);
             // reverse the right side
             reverseArray(nums, i, nums.length - 1);
         }
@@ -29,11 +27,15 @@ class Solution {
 
     private void reverseArray(int[] nums, int left, int right) {
         while (left < right) {
-            int temp = nums[right];
-            nums[right] = nums[left];
-            nums[left] = temp;
+            exchange(nums, left, right);
             left++;
             right--;
         }
+    }
+
+    private void exchange(int[] nums, int x, int y) {
+        int temp = nums[x];
+        nums[x] = nums[y];
+        nums[y] = temp;
     }
 }
