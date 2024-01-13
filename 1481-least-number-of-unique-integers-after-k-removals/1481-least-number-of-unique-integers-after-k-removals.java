@@ -1,40 +1,38 @@
 class Solution {
     public int findLeastNumOfUniqueInts(int[] arr, int k) {
-        
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < arr.length; i++) {
-            if (map.containsKey(arr[i])) {
-                map.put(arr[i], map.get(arr[i]) + 1);
-            } else {
-                map.put(arr[i], 1);
-            }
+        Map<Integer, Integer> freq = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+
+        for (int i: arr) {
+            freq.put(i, freq.getOrDefault(i, 0) + 1);
         }
 
-        // System.out.println(map);
+        for (Map.Entry<Integer, Integer> entry: freq.entrySet()) {
+            list.add(entry.getValue());
+        }
 
-        int size = map.size();
-        int[] array = new int[size];
+        Collections.sort(list, new Comparator<Integer>(){
+            public int compare(Integer x, Integer y) {
+                return x.compareTo(y);
+            }
+        });
+
+        int result = freq.size();
         int j = 0;
 
-        for (Map.Entry<Integer, Integer> pair : map.entrySet()) {
-            array[j] = pair.getValue();
-            j++;
-        }
-
-        Arrays.sort(array); 
-
-        // System.out.println(Arrays.toString(array));
-
-        int index = 0;
-
-        while (k > 0) {
-            k -= array[index];
-            if (k >= 0) {
-                index++;
+        while (k >= 0 && j < list.size()) {
+            if (list.get(j) <= k) {
+                k -= list.get(j);
+                j++;
+                result--;
+            } else {
+                break;
             }
         }
 
-        return array.length - index;
-        
+        return result;
+
+
+
     }
 }
