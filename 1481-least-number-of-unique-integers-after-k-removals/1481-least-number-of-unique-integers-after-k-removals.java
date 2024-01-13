@@ -20,7 +20,7 @@ class Solution {
         int result = freq.size();
         int j = 0;
 
-        while (k >= 0 && j < list.size()) {
+        while (k > 0) {
             if (list.get(j) <= k) {
                 k -= list.get(j);
                 j++;
