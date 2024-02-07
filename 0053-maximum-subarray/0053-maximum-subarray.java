@@ -9,8 +9,7 @@ class Solution {
         int curr_sum = nums[0];
         int max_sum = nums[0];
         while (j < nums.length) {
-             // if the new sum is less than the jth element:
-             if (curr_sum + nums[j] < nums[j]) {
+             if (curr_sum < 0) {
                  curr_sum = Math.max(curr_sum, nums[j]);
                  i = j;
              } else {
