@@ -1,24 +1,21 @@
 class Solution {
     public int maxSubArray(int[] nums) {
-        /**
-        hint: max_sub[j] := the maximum of subarray sum until index j
-              max_sub[j] = MAX(max_sub[j - 1] + nums[j], nums[j])
-         */
-        int i = 1;
-        int j = 1;
         int curr_sum = nums[0];
         int max_sum = nums[0];
-        while (j < nums.length) {
-             if (curr_sum < 0) {
-                 curr_sum = Math.max(curr_sum, nums[j]);
-                 i = j;
-             } else {
-                curr_sum += nums[j];
-             }
-             max_sum = Math.max(curr_sum, max_sum);
-             j++;
+        int left = 0;
+        int right = 1;
+        while (right < nums.length) {
+            if (curr_sum < 0) {
+                left = right;
+                curr_sum = nums[left];
+            } else {
+                curr_sum += nums[right];
+            }
+            right++;
+            max_sum = Math.max(max_sum, curr_sum);
         }
-
         return max_sum;
+
+
     }
 }
