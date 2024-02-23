@@ -1,4 +1,5 @@
 class Solution {
+    
     public String convertToBase7(int num) {
         String result = "";
         List<Integer> digits = new ArrayList();
@@ -13,8 +14,6 @@ class Solution {
         for (int digit: digits) {
             result += digit;
         }
-        
-        
         
         return num < 0 ? '-' + result :
                num == 0 ? "0" :
